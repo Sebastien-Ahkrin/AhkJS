@@ -3,8 +3,8 @@ const Discord = require('discord.js');
 
 module.exports = class help extends Commands{
 
-    constructor(name, description, syntax, prefix){
-        super(name, description, syntax, prefix);
+    constructor(prefix){
+        super("help", "Displays the list of commands with their descriptions", prefix);
     }
 
     action(message){
@@ -15,7 +15,7 @@ module.exports = class help extends Commands{
 
         this.commands.forEach(
             cmd => {
-                embed.addField(cmd.prefix + "**" + cmd.syntax + "**", "*> " + cmd.description + "*");
+                embed.addField(cmd.prefix + "**" + cmd.name + "**", "*> " + cmd.description + "*");
             }
         );
 

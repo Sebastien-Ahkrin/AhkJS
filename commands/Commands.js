@@ -1,9 +1,8 @@
 module.exports = class Commands {
 
-    constructor(name, description, syntax, prefix){
+    constructor(name, description, prefix){
         this.name = name;
         this.description = description;
-        this.syntax = syntax;
         this.prefix = prefix;
     }
 

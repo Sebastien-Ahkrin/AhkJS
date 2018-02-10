@@ -3,8 +3,8 @@ const Discord = require('discord.js');
 
 module.exports = class Ping extends Commands{
 
-    constructor(name, description, syntax, prefix){
-        super(name, description, syntax, prefix);
+    constructor(prefix){
+        super("ping", "Pong", prefix);
     }
 
     action(message){
