@@ -4,10 +4,10 @@ const Discord = require('discord.js');
 module.exports = class help extends Commands {
 
     constructor(prefix){
-        super("help", "Displays the list of commands with their descriptions", prefix);
+        super("help", "Displays the list of commands with their descriptions", prefix, "help");
     }
 
-    action(message){
+    action(message, args){
         const embed = new Discord.RichEmbed();
         embed.setColor("#016AC7");
         embed.setDescription("__**List of commands :**__");
@@ -15,7 +15,7 @@ module.exports = class help extends Commands {
 
         this.commands.forEach(
             cmd => {
-                embed.addField(cmd.prefix + "**" + cmd.name + "**", "*> " + cmd.description + "*");
+                embed.addField(cmd.prefix + "**" + cmd.usage + "**", "*> " + cmd.description + "*");
             }
         );
 
