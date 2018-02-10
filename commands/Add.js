@@ -4,14 +4,14 @@ const Discord = require('discord.js');
 module.exports = class Ping extends Commands {
 
     constructor(prefix){
-        super("ping", "Pong", prefix);
+        super("add", "Send a message for add Ahk in your guilde.", prefix);
     }
 
     action(message){
         const embed = new Discord.RichEmbed();
         embed.setColor("#016AC7");
         embed.setThumbnail("http://litarvan.github.io/krobot_icons/info_v2.png");
-        embed.addField("**" + "ping" + "**", "pong");
+        embed.addField("**Message for add AhkJS**", "https://discordapp.com/oauth2/authorize?client_id=411883445980233729&scope=bot");
         message.channel.send({embed});
     }
 

@@ -1,10 +1,20 @@
+const fs = require("fs");
+
 const commands = require('./main.js');
 
 const discord = require('discord.js');
 const client = new discord.Client();
 
 client.on('message', message => commands.main(message));
-client.on('ready', () => console.log(`Logged in as ${client.user.tag}!`));
+client.on('ready',
+    () => {
+        client.user.setAvatar(fs.readFileSync('./ressources/Ahk.png'), err => {
+            if (err) throw err;
+        });
+        client.user.username = "AhkJS";
+        console.log(`Logged in as ${client.user.tag}!`);
+    }
+);
 client.on('reconnecting', () => console.log('Reconnecting'));
 client.on('error', error => console.error(error));
 

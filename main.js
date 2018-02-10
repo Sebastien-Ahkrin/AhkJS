@@ -2,10 +2,14 @@ const prefix = "<";
 
 const Help = new (require("./commands/Help.js"))(prefix);
 const Ping = new (require("./commands/Ping.js"))(prefix);
+const Add = new (require("./commands/Add.js"))(prefix);
+const GitHub = new (require("./commands/GitHub.js"))(prefix);
 
 const commands = [
     Help,
-    Ping
+    Ping,
+    Add,
+    GitHub
 ];
 
 Help.commands = commands;
@@ -21,7 +25,7 @@ function main(message){
 
     commands.forEach(
         cmd => {
-            if(command === cmd.name){
+            if(command.toLowerCase() === cmd.name.toLowerCase()){
                 cmd.action(message);
             }
         }

@@ -1,7 +1,7 @@
 const Commands = require("./Commands.js");
 const Discord = require('discord.js');
 
-module.exports = class help extends Commands{
+module.exports = class help extends Commands {
 
     constructor(prefix){
         super("help", "Displays the list of commands with their descriptions", prefix);
