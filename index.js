@@ -2,8 +2,8 @@ const fs = require("fs");
 
 const app = require('./main.js');
 
-const discord = require('discord.js');
-const client = new discord.Client();
+const Discord = require('discord.js');
+const client = new Discord.Client();
 
 client.on('message', message => app.main(message));
 
@@ -17,6 +17,24 @@ client.on('ready',
         console.log(`Logged in as ${client.user.tag}!`);
     }
 );
+
+client.on("guildMemberAdd", (member) => {
+    const guild = member.guild;
+    if(guild.id === "278966830473674753"){
+        const embed = new Discord.RichEmbed();
+        embed.setAuthor(member.user.username, member.user.avatarURL);
+        embed.setColor("#EFEA6B");
+        embed.addField("Bienvenue à " + member.user.username,
+            "Souhaitez la bienvenue au nouveau vous autres, ou soyez maudit !");
+        guild.channels.forEach(
+            channel => {
+                if(channel.id === "278967298310799362"){
+                    channel.send({ embed });
+                }
+            }
+        );
+    }
+});
 
 client.on('reconnecting', () => console.log('Reconnecting'));
 client.on('error', error => console.error(error));

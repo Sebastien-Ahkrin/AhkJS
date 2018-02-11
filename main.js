@@ -6,6 +6,7 @@ const Add = new (require("./commands/Add.js"))(prefix);
 const GitHub = new (require("./commands/GitHub.js"))(prefix);
 const Twitch = new (require("./commands/Twitch.js"))(prefix);
 const Clr = new (require("./commands/Clr.js"))(prefix);
+const Ban = new (require("./commands/Ban.js"))(prefix);
 
 const commands = [
     Help,
@@ -13,7 +14,8 @@ const commands = [
     Add,
     GitHub,
     Twitch,
-    Clr
+    Clr,
+    Ban
 ];
 
 Help.commands = commands;
