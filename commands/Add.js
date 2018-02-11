@@ -10,26 +10,26 @@ module.exports = class Ping extends Commands {
             prefix,
             "add",
             {
-                user: ["MESSAGE_WRITE"],
-                client: ['MESSAGE_WRITE']
+                user: ["SEND_MESSAGES"],
+                client: ['SEND_MESSAGES']
             }
         );
     }
 
     action(message, args){
-        const embed = new Discord.RichEmbed();
-        embed.setColor("#016AC7");
-        embed.setThumbnail("http://litarvan.github.io/krobot_icons/info_v2.png");
-        embed.addField("**Message for add AhkJS**", "https://discordapp.com/oauth2/authorize?client_id=411883445980233729&scope=bot");
-        message.channel.send({embed});
-    }
-
-    error(){
-
-    }
-
-    help(){
-
+        super.action(message, args).then(
+            channel => {
+                const embed = new Discord.RichEmbed();
+                embed.setColor("#016AC7");
+                embed.setThumbnail("http://litarvan.github.io/krobot_icons/info_v2.png");
+                embed.addField("**Message for add AhkJS**", "https://discordapp.com/oauth2/authorize?client_id=411883445980233729&scope=bot");
+                channel.send({embed});
+            }
+        ).catch(
+            type => {
+                super.error(message, type);
+            }
+        )
     }
 
 }
