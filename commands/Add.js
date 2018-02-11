@@ -4,7 +4,16 @@ const Discord = require('discord.js');
 module.exports = class Ping extends Commands {
 
     constructor(prefix){
-        super("add", "Send a message for add Ahk in your guilde.", prefix, "add");
+        super(
+            "add",
+            "Send a message for add Ahk in your guilde.",
+            prefix,
+            "add",
+            {
+                user: ["MESSAGE_WRITE"],
+                client: ['MESSAGE_WRITE'] 
+            }
+        );
     }
 
     action(message, args){

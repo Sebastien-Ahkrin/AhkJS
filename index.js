@@ -1,20 +1,23 @@
 const fs = require("fs");
 
-const commands = require('./main.js');
+const app = require('./main.js');
 
 const discord = require('discord.js');
 const client = new discord.Client();
 
-client.on('message', message => commands.main(message));
+client.on('message', message => app.main(message));
+
 client.on('ready',
     () => {
         client.user.setAvatar(fs.readFileSync('./ressources/Ahk.png'), err => {
             if (err) throw err;
         });
         client.user.username = "AhkJS";
+
         console.log(`Logged in as ${client.user.tag}!`);
     }
 );
+
 client.on('reconnecting', () => console.log('Reconnecting'));
 client.on('error', error => console.error(error));
 
@@ -23,3 +26,5 @@ if (process.env.DISCORD_TOKEN === undefined) {
 }
 
 client.login(process.env.DISCORD_TOKEN);
+
+module.exports = client;

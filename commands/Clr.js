@@ -6,7 +6,16 @@ const client = require('./../index.js');
 module.exports = class Clr extends Commands {
 
     constructor(prefix){
-        super("clr", "Clear a number of message [Only for Admin]", prefix, '<num:int>');
+        super(
+            "clr",
+            "Clear a number of message [Only for Admin]",
+            prefix,
+            '<num:int>',
+            {
+                user: ['MANAGE_MESSAGES'],
+                client: ['MANAGE_MESSAGES']
+            }
+        );
     }
 
     action(message, args){
@@ -19,7 +28,7 @@ module.exports = class Clr extends Commands {
         if(!member.hasPermission("MANAGE_MESSAGES")){ this.error(message, "permission"); return; }
 
         const d = (number < 100 ? (parseInt(number) + 1) : number)
-        
+
         message.channel.fetchMessages({ limit: d })
                .then(list => {
                     message.channel.bulkDelete(list);

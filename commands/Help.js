@@ -4,7 +4,16 @@ const Discord = require('discord.js');
 module.exports = class help extends Commands {
 
     constructor(prefix){
-        super("help", "Displays the list of commands with their descriptions", prefix, "help");
+        super(
+            "help",
+            "Displays the list of commands with their descriptions",
+            prefix,
+            "help",
+            {
+                user: ["MESSAGE_WRITE"],
+                client: ['MESSAGE_WRITE']
+            }
+        );
     }
 
     action(message, args){

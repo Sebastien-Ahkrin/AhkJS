@@ -10,7 +10,16 @@ if (process.env.TWITCH_TOKEN === undefined) {
 module.exports = class Twitch extends Commands {
 
     constructor(prefix){
-        super("twitch", "Get a twitch informations", prefix, 'twitch <name:string>');
+        super(
+            "twitch",
+            "Get a twitch informations",
+            prefix,
+            'twitch <name:string>',
+            {
+                user: ["MESSAGE_WRITE"],
+                client: ['MESSAGE_WRITE']
+            }
+        );
     }
 
     action(message, args){
