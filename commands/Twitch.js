@@ -16,14 +16,16 @@ module.exports = class Twitch extends Commands {
             prefix,
             'twitch <name:string>',
             {
-                user: ["MESSAGE_WRITE"],
-                client: ['MESSAGE_WRITE']
+                user: ["SEND_MESSAGES"],
+                client: ['SEND_MESSAGES']
             }
         );
     }
 
     action(message, args){
         if(args.length !== 1) { this.error(message); return; }
+
+
 
         const stream = args[0];
 
@@ -51,25 +53,6 @@ module.exports = class Twitch extends Commands {
 
                 message.channel.send({embed});
             }).catch(err => this.error(message, err));
-    }
-
-    error(message, error){
-
-        if(error === undefined){
-            const embed = new Discord.RichEmbed();
-            embed.setColor("#EFEA6B");
-            embed.setThumbnail("http://litarvan.github.io/krobot_icons/warn.png");
-            embed.addField("**Error**", "Vous devez donner uniquement, 1 arguments.");
-
-            message.channel.send({embed});
-        }else{
-            console.log(error);
-        }
-
-    }
-
-    help(){
-
     }
 
 }
