@@ -5,7 +5,7 @@ const app = require('./main.js');
 const discord = require('discord.js');
 const client = new discord.Client();
 
-client.on('message', message => app.main(message));
+client.on('message', message => app.main(message, client));
 
 client.on('ready',
     () => {
@@ -26,5 +26,3 @@ if (process.env.DISCORD_TOKEN === undefined) {
 }
 
 client.login(process.env.DISCORD_TOKEN);
-
-module.exports = client;

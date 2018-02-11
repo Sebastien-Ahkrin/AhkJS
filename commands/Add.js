@@ -11,7 +11,7 @@ module.exports = class Ping extends Commands {
             "add",
             {
                 user: ["MESSAGE_WRITE"],
-                client: ['MESSAGE_WRITE'] 
+                client: ['MESSAGE_WRITE']
             }
         );
     }

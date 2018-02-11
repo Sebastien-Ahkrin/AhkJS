@@ -1,5 +1,3 @@
-const client = require("./../index.js");
-
 module.exports = class Commands {
 
     constructor(name, description, prefix, usage, permissions){
