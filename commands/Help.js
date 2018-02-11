@@ -51,7 +51,7 @@ module.exports = class help extends Commands {
             type => {
                 super.error(message, type);
             }
-        );
+        )
 
     }
 

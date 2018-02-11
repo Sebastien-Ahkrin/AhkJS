@@ -23,32 +23,28 @@ class Commands {
         return embed;
     }
 
-    action(message, args){
-        return new Promise((resolve, reject) => {
-            const member = message.member;
-            this.permissions.user.forEach(
-                perm => {
-                    if(!member.hasPermission(perm)){
-                        reject("PERMISSION");
-                    }
-                }
-            );
-            const client = message.client;
-            message.guild.fetchMember(client.user, true)
-              .then(
-                  member => {
-                      this.permissions.client.forEach(
-                          perm => {
-                              if(!member.hasPermission(perm)){
-                                  reject("PERMISSION");
-                              }
-                              resolve(message.channel);
-                          }
-                      );
-                  }
-              );
+    action(message, args) {
+        const member = message.member;
+        this.permissions.user.forEach(
+          perm => {
+            if (!member.hasPermission(perm)) {
+              throw "PERMISSION";
+            }
+          }
+        );
+        const client = message.client;
+        return message.guild.fetchMember(client.user, true)
+          .then(member => {
+          this.permissions.client.forEach(
+            perm => {
+              if (!member.hasPermission(perm)) {
+                throw "PERMISSION";
+              }
+              return message.channel;
+            }
+          );
         });
-    }
+      }
 
     error(message, type){
         switch(type){
