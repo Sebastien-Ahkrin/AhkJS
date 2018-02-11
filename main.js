@@ -37,3 +37,5 @@ function main(message){
     );
 
 }
+
+module.exports = { main }

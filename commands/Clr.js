@@ -1,7 +1,6 @@
 const Commands = require("./Commands.js");
 const Discord = require('discord.js');
 
-const client = require('./../main.js');
 
 module.exports = class Clr extends Commands {
 

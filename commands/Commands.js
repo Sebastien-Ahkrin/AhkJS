@@ -1,4 +1,6 @@
-module.exports = class Commands {
+const Discord = require('discord.js');
+
+class Commands {
 
     constructor(name, description, prefix, usage, permissions){
         this.name = name;
@@ -8,23 +10,81 @@ module.exports = class Commands {
         this.permissions = permissions;
     }
 
-    action(message, args){
-        const member = message.member;
-
-        console.log(cmd.permissions);
-
-        this.permissions.user.forEach(
-            perm => {
-                if(!member.hasPermission(perm)) return;
+    embed(color, title, photo, fields){
+        const embed = new Discord.RichEmbed();
+        embed.setColor(color);
+        embed.setDescription(title);
+        embed.setThumbnail(photo);
+        fields.forEach(
+            field => {
+                embed.addField(field.title, field.content);
             }
         );
+        return embed;
+    }
 
+    action(message, args){
+        return new Promise((resolve, reject) => {
+            const member = message.member;
+            this.permissions.user.forEach(
+                perm => {
+                    if(!member.hasPermission(perm)){
+                        reject("PERMISSION");
+                    }
+                }
+            );
+            const client = message.client;
+            message.guild.fetchMember(client.user, true)
+              .then(
+                  member => {
+                      this.permissions.client.forEach(
+                          perm => {
+                              if(!member.hasPermission(perm)){
+                                  reject("PERMISSION");
+                              }
+                              resolve(message.channel);
+                          }
+                      );
+                  }
+              );
+        });
     }
 
     error(message, type){
+        switch(type){
+            case 'PERMISSION':
+                const e = this.embed(
+                    "#b8001e",
+                    "",
+                    "http://litarvan.github.io/krobot_icons/error.png",
+                    [
+                        {
+                            title: "**Error**",
+                            content: "Il manque des permissions."
+                        },
+                        {
+                            title: "**Client**",
+                            content: "Le client a besoin de la permission : "
+                                    + this.permissions.client
+                        },
+                        {
+                            title: "**User**",
+                            content: "L'utilisateur a besoin de la permission : "
+                                    + this.permissions.user
+                        }
+                    ]
+                );
+                message.channel.send(e);
+                break;
+            default:
+                break;
+        }
+    }
+
+    help(){
 
     }
 
-    help(){}
-
 }
+
+module.exports = Commands;
