@@ -21,7 +21,7 @@ client.on('ready',
         client.user.setAvatar(fs.readFileSync('./ressources/Ahk.png'), err => {
             if (err) throw err;
         });
-        client.user.username = "AhkJS";
+        client.user.username = "Ahk";
 
         client.user.setPresence(
             {
