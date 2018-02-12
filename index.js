@@ -21,6 +21,12 @@ client.on('ready',
         });
         client.user.username = "AhkJS";
 
+        client.user.setPresence(
+            {
+                game: prefix + "help"
+            }
+        );
+
         console.log(`Logged in as ${client.user.tag}\n` +
                     `TOKEN = "${client.token}"\n`);
     }
