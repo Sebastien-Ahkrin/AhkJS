@@ -5,6 +5,13 @@ const app = require('./main.js');
 const Discord = require('discord.js');
 const client = new Discord.Client();
 
+if (process.env.DISCORD_TOKEN === undefined ||
+    process.env.GALHARIM_ID === undefined ||
+        process.env.GALHARIM_CHAN_ID === undefined) {
+    require('dotenv').load();
+}
+
+
 client.on('message', message => app.main(message));
 
 client.on('ready',
@@ -14,13 +21,14 @@ client.on('ready',
         });
         client.user.username = "AhkJS";
 
-        console.log(`Logged in as ${client.user.tag}!`);
+        console.log(`Logged in as ${client.user.tag}\n` +
+                    `TOKEN = "${client.token}"\n`);
     }
 );
 
 client.on("guildMemberAdd", (member) => {
     const guild = member.guild;
-    if(guild.id === "278966830473674753"){
+    if(guild.id === process.env.GALHARIM_ID){
         const embed = new Discord.RichEmbed();
         embed.setAuthor(member.user.username, member.user.avatarURL);
         embed.setColor("#EFEA6B");
@@ -28,7 +36,7 @@ client.on("guildMemberAdd", (member) => {
             "Souhaitez la bienvenue au nouveau vous autres, ou soyez maudit !");
         guild.channels.forEach(
             channel => {
-                if(channel.id === "278967298310799362"){
+                if(channel.id === process.env.GALHARIM_CHAN_ID){
                     channel.send({ embed });
                 }
             }
@@ -39,10 +47,4 @@ client.on("guildMemberAdd", (member) => {
 client.on('reconnecting', () => console.log('Reconnecting'));
 client.on('error', error => console.error(error));
 
-if (process.env.DISCORD_TOKEN === undefined) {
-  require('dotenv').load();
-}
-
 client.login(process.env.DISCORD_TOKEN);
-
-global.client = client;

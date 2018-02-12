@@ -57,14 +57,14 @@ module.exports = class Ban extends Commands {
                 embed.setColor("#EFEA6B");
                 embed.setThumbnail("http://litarvan.github.io/krobot_icons/warn.png");
                 embed.addField("**Error**", "Je ne trouve personne.");
-                channel.send({find});
+                channel.send({ find });
                 break;
             case "BAN":
                 const ban = new Discord.RichEmbed();
                 embed.setColor("#EFEA6B");
                 embed.setThumbnail("http://litarvan.github.io/krobot_icons/error.png");
                 embed.addField("**Error**", "Je ne peux pas bannir la personne.");
-                channel.send({ban});
+                channel.send({ ban });
                 break;
             default:
                 break;
