@@ -25,7 +25,9 @@ client.on('ready',
 
         client.user.setPresence(
             {
-                game: prefix + "help"
+                game: {
+                    name: prefix + "help"
+                }
             }
         );
 
