@@ -1,4 +1,4 @@
-const prefix = "<";
+const prefix = "$";
 
 const Help = new (require("./commands/Help.js"))(prefix);
 const Ping = new (require("./commands/Ping.js"))(prefix);

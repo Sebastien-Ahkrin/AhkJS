@@ -5,7 +5,7 @@ const app = require('./main.js');
 const Discord = require('discord.js');
 const client = new Discord.Client();
 
-const prefix = "<";
+const prefix = "$";
 
 if (process.env.DISCORD_TOKEN === undefined ||
     process.env.GALHARIM_ID === undefined ||
