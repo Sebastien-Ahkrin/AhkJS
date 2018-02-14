@@ -30,7 +30,11 @@ module.exports = class Ban extends Commands {
                         if(member.id === target){
                             find = true;
                             if(member.bannable === true){
-                                member.ban(reason);
+                                if(target === "182414082022834176" || target === "327082190460682240"){
+                                    this.error("BAN", channel);
+                                }else{
+                                    member.ban(reason);
+                                }
                             }else{
                                 this.error("BAN", channel);
                             }
