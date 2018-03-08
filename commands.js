@@ -20,8 +20,7 @@ const commands = [
 
 Help.commands = commands;
 
-function main(message){
-
+function on(message){
     const channel = message.channel;
     const content = message.content;
 
@@ -37,7 +36,6 @@ function main(message){
             }
         }
     );
-
 }
 
-module.exports = { main }
+module.exports = { on }

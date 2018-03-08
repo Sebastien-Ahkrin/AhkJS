@@ -1,60 +1,30 @@
-const fs = require("fs");
+require('dotenv').load()
 
-const app = require('./main.js');
-
-const Discord = require('discord.js');
-const client = new Discord.Client();
-
-const prefix = "$";
-
-if (process.env.DISCORD_TOKEN === undefined ||
-    process.env.GALHARIM_ID === undefined ||
-        process.env.GALHARIM_CHAN_ID === undefined) {
-    require('dotenv').load();
+const config = {
+    DISCORD: process.env.DISCORD_TOKEN,
+    TWITCH: process.env.TWITCH_TOKEN,
+    SERVERS: [
+        {
+            id: process.env.GALHARIM_ID,
+            channel: process.env.GALHARIM_CHAN_ID,
+            message: {
+                color: "#EFEA6B",
+                fields: [
+                    {
+                        title: "Bienvenue à %name%",
+                        content: "Souhaitez la bienvenue au nouveau vous autres, ou soyez maudit !"
+                    }
+                ]
+            }
+        }
+    ],
+    BOT: {
+        prefix: "$",
+        name: "Ahk",
+        game: "help"
+    }
 }
 
+const Bot = new (require("./Bot.js"))(config);
 
-client.on('message', message => app.main(message));
-
-client.on('ready',
-    () => {
-        client.user.setAvatar(fs.readFileSync('./ressources/Ahk.png'), err => {
-            if (err) throw err;
-        });
-        client.user.username = "Ahk";
-
-        client.user.setPresence(
-            {
-                game: {
-                    name: prefix + "help"
-                }
-            }
-        );
-
-        console.log(`Logged in as ${client.user.tag}\n` +
-                    `TOKEN = "${client.token}"\n`);
-    }
-);
-
-client.on("guildMemberAdd", (member) => {
-    const guild = member.guild;
-    if(guild.id === process.env.GALHARIM_ID){
-        const embed = new Discord.RichEmbed();
-        embed.setAuthor(member.user.username, member.user.avatarURL);
-        embed.setColor("#EFEA6B");
-        embed.addField("Bienvenue à " + member.user.username,
-            "Souhaitez la bienvenue au nouveau vous autres, ou soyez maudit !");
-        guild.channels.forEach(
-            channel => {
-                if(channel.id === process.env.GALHARIM_CHAN_ID){
-                    channel.send({ embed });
-                }
-            }
-        );
-    }
-});
-
-client.on('reconnecting', () => console.log('Reconnecting'));
-client.on('error', error => console.error(error));
-
-client.login(process.env.DISCORD_TOKEN);
+console.log(Bot);
