@@ -1,6 +1,6 @@
 const Commands = require("./Commands.js");
 
-module.exports = class Ban extends Commands {
+class Ban extends Commands {
 
     constructor(){
         super(
@@ -79,3 +79,5 @@ module.exports = class Ban extends Commands {
     }
 
 }
+
+module.exports = new Ban()

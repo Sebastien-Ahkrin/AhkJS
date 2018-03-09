@@ -37,6 +37,10 @@ class Bot {
         client.login(this._token)
     }
 
+    initEvents(){
+        
+    }
+
     initCommands(){
         this.commands.forEach(cmd => this.listener.addCommands(cmd))
     }

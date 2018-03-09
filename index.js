@@ -1,5 +1,7 @@
 require('dotenv').load()
 
+const commands = require("./commands")
+
 const config = {
     discord: process.env.DISCORD_TOKEN,
     twitch: process.env.TWITCH_TOKEN,
@@ -25,12 +27,7 @@ const config = {
         icon_path: "./ressources/Ahk.png"
     },
     commands: [
-        new (require("./commands/Add.js")),
-        new (require("./commands/Ban.js")),
-        new (require("./commands/Clr.js")),
-        new (require("./commands/GitHub.js")),
-        new (require("./commands/Ping.js")),
-        new (require("./commands/Help.js"))
+        commands
     ]
 }
 

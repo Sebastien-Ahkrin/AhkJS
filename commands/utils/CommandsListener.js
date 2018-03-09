@@ -9,6 +9,7 @@ class CommandsListener {
     }
 
     addCommands(commands){
+        console.log(commands)
         commands.setPrefix(this._prefix)
         this._commands.push(commands)
         if(commands.name === "help") commands.setCommands(this._commands)

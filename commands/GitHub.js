@@ -1,7 +1,7 @@
 const Commands = require("./Commands.js");
 const Discord = require('discord.js');
 
-module.exports = class Ping extends Commands {
+class GitHub extends Commands {
 
     constructor(){
         super(
@@ -36,3 +36,5 @@ module.exports = class Ping extends Commands {
     }
 
 }
+
+module.exports = new GitHub()

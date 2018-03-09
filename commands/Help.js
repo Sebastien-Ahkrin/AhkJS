@@ -1,7 +1,7 @@
 const Commands = require("./Commands.js");
 const Discord = require('discord.js');
 
-module.exports = class help extends Commands {
+class Help extends Commands {
 
     constructor(){
         super(
@@ -49,3 +49,5 @@ module.exports = class help extends Commands {
     }
 
 }
+
+module.exports = new Help()
