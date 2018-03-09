@@ -2,11 +2,10 @@ const Commands = require("./Commands.js");
 
 module.exports = class Ban extends Commands {
 
-    constructor(prefix){
+    constructor(){
         super(
             "ban",
             "Ban a user [Only for Admin]",
-            prefix,
             'ban',
             {
                 user: ["BAN_MEMBERS"],
@@ -14,6 +13,10 @@ module.exports = class Ban extends Commands {
             },
             [ "<id:int>", "<msg:string>" ]
         );
+    }
+
+    setPrefix(prefix){
+        super.setPrefix(prefix)
     }
 
     action(message, args){

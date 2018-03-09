@@ -3,18 +3,24 @@ const Discord = require('discord.js');
 
 module.exports = class help extends Commands {
 
-    constructor(prefix){
+    constructor(){
         super(
             "help",
             "Displays the list of commands with their descriptions",
-            prefix,
             "help",
             {
                 user: ["SEND_MESSAGES"],
                 client: ['SEND_MESSAGES']
             }
-        );
+        )
+    }
 
+    setPrefix(prefix){
+        super.setPrefix(prefix)
+    }
+
+    setCommands(commands){
+        this._commands = commands
     }
 
     action(message, args){
@@ -25,7 +31,7 @@ module.exports = class help extends Commands {
                 embed.setDescription("__**List of commands :**__");
                 embed.setThumbnail("http://litarvan.github.io/krobot_icons/info_v2.png");
 
-                this.commands.forEach(
+                this._commands.forEach(
                     cmd => {
                         embed.addField(cmd.prefix + "**" + cmd.usage + "** " +
                             (cmd.args !== undefined ? cmd.args : ""), "*> " +

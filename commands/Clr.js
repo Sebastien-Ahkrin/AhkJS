@@ -4,11 +4,10 @@ const Discord = require('discord.js');
 
 module.exports = class Clr extends Commands {
 
-    constructor(prefix){
+    constructor(){
         super(
             "clr",
             "Clear a number of message [Only for Admin]",
-            prefix,
             'clr',
             {
                 user: ['MANAGE_MESSAGES'],
@@ -16,6 +15,10 @@ module.exports = class Clr extends Commands {
             },
             [ "<num:int>" ]
         );
+    }
+
+    setPrefix(prefix){
+        super.setPrefix(prefix)
     }
 
     action(message, args){

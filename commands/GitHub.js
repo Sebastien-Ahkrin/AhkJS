@@ -3,17 +3,20 @@ const Discord = require('discord.js');
 
 module.exports = class Ping extends Commands {
 
-    constructor(prefix){
+    constructor(){
         super(
             "github",
             "Show My GitHub Account.",
-            prefix,
             "github",
             {
                 user: ["SEND_MESSAGES"],
                 client: ['SEND_MESSAGES']
             }
         );
+    }
+
+    setPrefix(prefix){
+        super.setPrefix(prefix)
     }
 
     action(message, args){

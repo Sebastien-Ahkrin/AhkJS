@@ -1,9 +1,9 @@
 require('dotenv').load()
 
 const config = {
-    DISCORD: process.env.DISCORD_TOKEN,
-    TWITCH: process.env.TWITCH_TOKEN,
-    SERVERS: [
+    discord: process.env.DISCORD_TOKEN,
+    twitch: process.env.TWITCH_TOKEN,
+    servers: [
         {
             id: process.env.GALHARIM_ID,
             channel: process.env.GALHARIM_CHAN_ID,
@@ -18,13 +18,20 @@ const config = {
             }
         }
     ],
-    BOT: {
-        prefix: "$",
+    bot: {
+        prefix: "/",
         name: "Ahk",
-        game: "help"
-    }
+        game: "help",
+        icon_path: "./ressources/Ahk.png"
+    },
+    commands: [
+        new (require("./commands/Add.js")),
+        new (require("./commands/Ban.js")),
+        new (require("./commands/Clr.js")),
+        new (require("./commands/GitHub.js")),
+        new (require("./commands/Ping.js")),
+        new (require("./commands/Help.js"))
+    ]
 }
 
-const Bot = new (require("./Bot.js"))(config);
-
-console.log(Bot);
+new (require("./Bot.js"))(config);

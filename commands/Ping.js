@@ -3,11 +3,10 @@ const Discord = require('discord.js');
 
 module.exports = class Ping extends Commands {
 
-    constructor(prefix){
+    constructor(){
         super(
             "ping",
             "Pong",
-            prefix,
             'ping',
             {
                 user: ["SEND_MESSAGES"],
@@ -16,13 +15,17 @@ module.exports = class Ping extends Commands {
         );
     }
 
+    setPrefix(prefix){
+        super.setPrefix(prefix)
+    }
+
     action(message, args){
         super.action(message, args).then(
             channel => {
                 const embed = new Discord.RichEmbed();
                 embed.setColor("#016AC7");
                 embed.setThumbnail("http://litarvan.github.io/krobot_icons/info_v2.png");
-                embed.addField("**" + "ping" + "**", message.client.ping.toFixed(3) + "ms.");
+                embed.addField("**" + "ping" + "**", message.client.ping.toFixed(0) + "ms.");
                 channel.send({embed});
             }
         ).catch(

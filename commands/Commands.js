@@ -2,13 +2,16 @@ const Discord = require('discord.js');
 
 class Commands {
 
-    constructor(name, description, prefix, usage, permissions, args){
+    constructor(name, description, usage, permissions, args){
         this.name = name;
         this.description = description;
-        this.prefix = prefix;
         this.usage = usage;
         this.permissions = permissions;
         this.args = args;
+    }
+
+    setPrefix(prefix){
+        this.prefix = prefix;
     }
 
     embed(color, title, photo, fields){
