@@ -10,10 +10,6 @@ class Commands {
         this.args = args;
     }
 
-    setPrefix(prefix){
-        this.prefix = prefix;
-    }
-
     embed(color, title, photo, fields){
         const embed = new Discord.RichEmbed();
         embed.setColor(color);

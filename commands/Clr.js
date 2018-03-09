@@ -14,45 +14,42 @@ class Clr extends Commands {
                 client: ['MANAGE_MESSAGES']
             },
             [ "<num:int>" ]
-        );
+        )
     }
 
-    setPrefix(prefix){
-        super.setPrefix(prefix)
-    }
+    async action(message, args){
 
-    action(message, args){
-
-        super.action(message, args).then(
-            channel => {
-                const number = args[0];
-                if(number <= 0 || number > 100) { this.error(message); return; }
-
-                const d = (number < 100 ? (parseInt(number) + 1) : number)
-
-                message.channel.fetchMessages({ limit: d }).then(
-                    list => {
-                        message.channel.bulkDelete(list);
-                    }
-                ).catch(
-                    error => {
-                        this.error(message, err);
-                    }
-                );
+        try{
+            const channel = await super.action(message, args)
+            const number = args[0]
+            if(number <= 0 || number > 100) {
+                this.error(message)
+                return
             }
-        ).catch(
-            type => {
-                super.error(message, type);
-            }
-        );
+
+            const d = (number < 100 ? (parseInt(number) + 1) : number)
+
+            message.channel.fetchMessages({ limit: d }).then(
+                list => {
+                    message.channel.bulkDelete(list)
+                }
+            ).catch(
+                error => {
+                    this.error(message, err)
+                }
+            )
+        }catch(type){
+            super.error(message, type)
+        }
+
     }
 
     error(message){
-        const embed = new Discord.RichEmbed();
-        embed.setColor("#EFEA6B");
-        embed.setThumbnail("http://litarvan.github.io/krobot_icons/warn.png");
-        embed.addField("**Error**", "L'argument doit être compris entre 1 et 100.");
-        message.channel.send({embed});
+        const embed = new Discord.RichEmbed()
+        embed.setColor("#EFEA6B")
+        embed.setThumbnail("http://litarvan.github.io/krobot_icons/warn.png")
+        embed.addField("**Error**", "L'argument doit être compris entre 1 et 100.")
+        message.channel.send({embed})
     }
 
 }

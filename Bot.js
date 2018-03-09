@@ -3,6 +3,8 @@ const fs = require("fs")
 const Discord = require('discord.js')
 const client = new Discord.Client()
 
+const Listener = require("./commands/utils/CommandsListener.js")
+
 class Bot {
 
     constructor(config){
@@ -16,7 +18,7 @@ class Bot {
     }
 
     init() {
-        this.listener = new (require("./commands/utils/CommandsListener.js"))(this._bot.prefix, client)
+        this.listener = new Listener(this._bot.prefix, client)
         this.initCommands()
 
         client.on('ready',
@@ -37,12 +39,8 @@ class Bot {
         client.login(this._token)
     }
 
-    initEvents(){
-        
-    }
-
     initCommands(){
-        this.commands.forEach(cmd => this.listener.addCommands(cmd))
+        this.commands.forEach(cmd => this.listener.addCommand(cmd))
     }
 
 }

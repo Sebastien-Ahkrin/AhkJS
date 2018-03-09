@@ -8,11 +8,13 @@ class CommandsListener {
         client.on('message', message => this.onMessage(message))
     }
 
-    addCommands(commands){
-        console.log(commands)
-        commands.setPrefix(this._prefix)
-        this._commands.push(commands)
-        if(commands.name === "help") commands.setCommands(this._commands)
+    addCommand(command){
+        this._commands.push(command)
+
+        if(command.name === "help"){
+            command.setCommands(this._commands)
+            command.setPrefix(this._prefix)
+        }
     }
 
     onMessage(message){

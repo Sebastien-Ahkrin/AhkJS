@@ -5,6 +5,6 @@ const git = require("./GitHub.js")
 const ping = require("./Ping.js")
 const help = require("./Help.js")
 
-module.exports = {
+module.exports = [
     add, ban, clr, git, ping, help
-}
+]

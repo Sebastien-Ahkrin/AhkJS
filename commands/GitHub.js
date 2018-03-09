@@ -12,27 +12,22 @@ class GitHub extends Commands {
                 user: ["SEND_MESSAGES"],
                 client: ['SEND_MESSAGES']
             }
-        );
+        )
     }
 
-    setPrefix(prefix){
-        super.setPrefix(prefix)
-    }
+    async action(message, args){
 
-    action(message, args){
-        super.action(message, args).then(
-            channel => {
-                const embed = new Discord.RichEmbed();
-                embed.setColor("#016AC7");
-                embed.setThumbnail("http://litarvan.github.io/krobot_icons/info_v2.png");
-                embed.addField("**GitHub**", "https://github.com/Sebastien-Ahkrin/AhkJS");
-                channel.send({ embed });
-            }
-        ).catch(
-            type => {
-                super.error(message, type);
-            }
-        );
+        try {
+            const channel = await super.action(message, args)
+            const embed = new Discord.RichEmbed()
+            embed.setColor("#016AC7")
+            embed.setThumbnail("http://litarvan.github.io/krobot_icons/info_v2.png")
+            embed.addField("**GitHub**", "https://github.com/Sebastien-Ahkrin/AhkJS")
+            channel.send({ embed })
+        }catch(type){
+            super.error(message, type)
+        }
+
     }
 
 }

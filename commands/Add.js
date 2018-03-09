@@ -12,27 +12,20 @@ class Add extends Commands {
                 user: ["SEND_MESSAGES"],
                 client: ['SEND_MESSAGES']
             }
-        );
-    }
-
-    setPrefix(prefix){
-        super.setPrefix(prefix)
-    }
-
-    action(message, args){
-        super.action(message, args).then(
-            channel => {
-                const embed = new Discord.RichEmbed();
-                embed.setColor("#016AC7");
-                embed.setThumbnail("http://litarvan.github.io/krobot_icons/info_v2.png");
-                embed.addField("**Message for add AhkJS**", "https://discordapp.com/oauth2/authorize?client_id=" + message.client.user.id + "&scope=bot");
-                channel.send({embed});
-            }
-        ).catch(
-            type => {
-                super.error(message, type);
-            }
         )
+    }
+
+    async action(message, args){
+        try {
+            const channel = await super.action(message, args)
+            const embed = new Discord.RichEmbed()
+            embed.setColor("#016AC7")
+            embed.setThumbnail("http://litarvan.github.io/krobot_icons/info_v2.png")
+            embed.addField("**Message for add AhkJS**", "https://discordapp.com/oauth2/authorize?client_id=" + message.client.user.id + "&scope=bot")
+            channel.send({embed})
+        } catch(type) {
+            super.error(message, type)
+        }
     }
 
 }

@@ -12,69 +12,60 @@ class Ban extends Commands {
                 client: ['BAN_MEMBERS']
             },
             [ "<id:int>", "<msg:string>" ]
-        );
+        )
     }
 
-    setPrefix(prefix){
-        super.setPrefix(prefix)
-    }
+    async action(message, args){
+        try {
+            const channel = await super.action(message, args)
+            const target = args[0];
+            const reason = args[1];
+            const guild = channel.guild;
 
-    action(message, args){
-        super.action(message, args).then(
-            channel => {
-                const target = args[0];
-                const reason = args[1];
-                const guild = channel.guild;
+            let find = false;
 
-                let find = false;
-
-                guild.members.forEach(
-                    member => {
-                        if(member.id === target){
-                            find = true;
-                            if(member.bannable === true){
-                                if(target === "182414082022834176" || target === "327082190460682240"){
-                                    this.error("BAN", channel);
-                                }else{
-                                    member.ban(reason);
-                                }
+            guild.members.forEach(
+                member => {
+                    if(member.id === target){
+                        find = true
+                        if(member.bannable === true){
+                            if(target === "182414082022834176" || target === "327082190460682240"){
+                                this.error("BAN", channel)
                             }else{
-                                this.error("BAN", channel);
+                                member.ban(reason)
                             }
+                        }else{
+                            this.error("BAN", channel)
                         }
                     }
-                );
-
-                if(find === false){
-                    this.error("FIND", channel);
                 }
-
+            )
+            if(find === false){
+                this.error("FIND", channel)
             }
-        ).catch(
-            type => {
-                super.error(message, type);
-            }
-        )
+        }catch(type){
+            super.error(message, type)
+        }
     }
 
     error(type, channel){
         switch(type){
             case "FIND":
-                const find = new Discord.RichEmbed();
-                embed.setColor("#EFEA6B");
-                embed.setThumbnail("http://litarvan.github.io/krobot_icons/warn.png");
-                embed.addField("**Error**", "Je ne trouve personne.");
-                channel.send({ find });
-                break;
+                const find = new Discord.RichEmbed()
+                embed.setColor("#EFEA6B")
+                embed.setThumbnail("http://litarvan.github.io/krobot_icons/warn.png")
+                embed.addField("**Error**", "Je ne trouve personne.")
+                channel.send({ find })
+                break
             case "BAN":
-                const ban = new Discord.RichEmbed();
-                embed.setColor("#EFEA6B");
-                embed.setThumbnail("http://litarvan.github.io/krobot_icons/error.png");
-                embed.addField("**Error**", "Je ne peux pas bannir la personne.");
-                channel.send({ ban });
-                break;
+                const ban = new Discord.RichEmbed()
+                embed.setColor("#EFEA6B")
+                embed.setThumbnail("http://litarvan.github.io/krobot_icons/error.png")
+                embed.addField("**Error**", "Je ne peux pas bannir la personne.")
+                channel.send({ ban })
+                break
             default:
-                break;
+                break
         }
     }
 

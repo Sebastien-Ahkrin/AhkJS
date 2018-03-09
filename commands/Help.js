@@ -16,36 +16,35 @@ class Help extends Commands {
     }
 
     setPrefix(prefix){
-        super.setPrefix(prefix)
+        this._prefix = prefix;
     }
 
     setCommands(commands){
         this._commands = commands
     }
 
-    action(message, args){
-        super.action(message, args).then(
-            channel => {
-                const embed = new Discord.RichEmbed();
-                embed.setColor("#016AC7");
-                embed.setDescription("__**List of commands :**__");
-                embed.setThumbnail("http://litarvan.github.io/krobot_icons/info_v2.png");
+    async action(message, args){
 
-                this._commands.forEach(
-                    cmd => {
-                        embed.addField(cmd.prefix + "**" + cmd.usage + "** " +
-                            (cmd.args !== undefined ? cmd.args : ""), "*> " +
-                                cmd.description + "*");
-                    }
-                );
+        try {
+            const channel = await super.action(message, args)
+            const embed = new Discord.RichEmbed()
+            embed.setColor("#016AC7")
+            embed.setDescription("__**List of commands :**__")
+            embed.setThumbnail("http://litarvan.github.io/krobot_icons/info_v2.png")
 
-                channel.send({embed});
-            }
-        ).catch(
-            type => {
-                super.error(message, type);
-            }
-        )
+            this._commands.forEach(
+                cmd => {
+                    embed.addField(this._prefix + "**" + cmd.usage + "** " +
+                        (cmd.args !== undefined ? cmd.args : ""), "*> " +
+                            cmd.description + "*")
+                }
+            )
+
+            channel.send({embed})
+        }catch(type){
+            super.error(message, type)
+        }
+
     }
 
 }

@@ -1,6 +1,7 @@
 require('dotenv').load()
 
 const commands = require("./commands")
+const Bot = require("./Bot.js")
 
 const config = {
     discord: process.env.DISCORD_TOKEN,
@@ -26,9 +27,7 @@ const config = {
         game: "help",
         icon_path: "./ressources/Ahk.png"
     },
-    commands: [
-        commands
-    ]
+    commands: commands
 }
 
-new (require("./Bot.js"))(config);
+new Bot(config);
