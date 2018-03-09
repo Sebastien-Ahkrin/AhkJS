@@ -26,13 +26,8 @@ class CommandsListener {
         const command = content.split(" ")[0].substring(this._prefix.length)
         const args = message.content.split(' ').slice(1)
 
-        this._commands.forEach(/* A re travailler */
-            cmd => {
-                if(command.toLowerCase() === cmd.name.toLowerCase()){
-                    cmd.action(message, args)
-                }
-            }
-        )
+        this._commands.filter(cmd => command.toLowerCase() === cmd.name.toLowerCase())
+            .forEach(cmd => cmd.action(message, args))
     }
 
 }
