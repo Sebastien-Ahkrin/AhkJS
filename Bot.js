@@ -19,7 +19,9 @@ class Bot {
 
     init() {
         this.listener = new Listener(this._bot.prefix, client)
+
         this.initCommands()
+        this.initEvents()
 
         client.on('ready',
             () => {
@@ -41,6 +43,28 @@ class Bot {
 
     initCommands(){
         this.commands.forEach(cmd => this.listener.addCommand(cmd))
+    }
+
+    initEvents(){
+        client.on("guildMemberAdd", (member) => {
+
+            this._servers.filter(server => member.guild.id === server.id)
+                .forEach(serv => {
+                    const embed = new Discord.RichEmbed()
+                    embed.setAuthor(member.user.username, member.user.avatarURL)
+                    embed.setColor(serv.message.color)
+                    serv.message.fields.forEach(
+                        field => {
+                            embed.addField(field.title.replace("%name%", member.user.username), field.content)
+                        }
+                    )
+
+                    member.guild.channels.filter(channel => channel.id === serv.channel)
+                        .forEach(chann => chann.send({ embed }))
+
+                })
+
+        });
     }
 
 }

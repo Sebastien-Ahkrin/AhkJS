@@ -22,7 +22,7 @@ const config = {
         }
     ],
     bot: {
-        prefix: "/",
+        prefix: "$",
         name: "Ahk",
         game: "help",
         icon_path: "./ressources/Ahk.png"
