@@ -9,12 +9,11 @@ class CommandsListener {
     }
 
     addCommand(command){
-        this._commands.push(command)
-
         if(command.name === "help"){
             command.setCommands(this._commands)
             command.setPrefix(this._prefix)
         }
+        this._commands.push(command)
     }
 
     onMessage(message){
