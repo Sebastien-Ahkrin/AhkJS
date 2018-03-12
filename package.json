@@ -13,6 +13,7 @@
     "discord.js": "^11.3.2",
     "dotenv": "^5.0.1",
     "request": "^2.83.0",
-    "request-promise": "^4.2.2"
+    "request-promise": "^4.2.2",
+    "ws": "^5.0.0"
   }
 }

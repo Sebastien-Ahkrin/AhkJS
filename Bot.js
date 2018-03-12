@@ -5,9 +5,14 @@ const client = new Discord.Client()
 
 const Listener = require("./commands/utils/CommandsListener.js")
 
+const Server = require("./www/")
+
 class Bot {
 
     constructor(config){
+
+        this._ws = new Server(8081, client)
+
         this._token = config.discord
         this._twitch = config.twitch
         this._servers = config.servers
