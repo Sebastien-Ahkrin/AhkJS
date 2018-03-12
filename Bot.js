@@ -41,6 +41,8 @@ class Bot {
             }
         )
 
+        client.on('message', message => this._ws.sendMessage(message, this._ws))
+
         client.on('error', error => console.error(error))
 
         client.login(this._token)
