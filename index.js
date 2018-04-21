@@ -34,14 +34,6 @@ user.registerCommand(commands.github, (message, channel, client, args) => {
     const embed = new Discord.RichEmbed()
         .setColor("#016AC7")
         .setThumbnail("http://litarvan.github.io/krobot_icons/info_v2.png")
-        .addField("**" + "ping" + "**", client.ping.toFixed(0) + "ms.")
-    channel.send({ embed })
-})
-
-user.registerCommand(commands.github, (message, channel, client, args) => {
-    const embed = new Discord.RichEmbed()
-        .setColor("#016AC7")
-        .setThumbnail("http://litarvan.github.io/krobot_icons/info_v2.png")
         .addField("**GitHub**", "https://github.com/Sebastien-Ahkrin/AhkJS")
     channel.send({ embed })
 })
