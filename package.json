@@ -1,19 +1,15 @@
 {
-  "name": "ahkdev",
+  "name": "ahk",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node index.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "discord.js": "^11.3.2",
-    "dotenv": "^5.0.1",
-    "request": "^2.83.0",
-    "request-promise": "^4.2.2",
-    "ws": "^5.0.0"
+    "ahkframework": "^1.1.3",
+    "dotenv": "^5.0.1"
   }
 }
