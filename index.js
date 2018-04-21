@@ -1,16 +1,10 @@
 require('dotenv').load()
 
-const Discord = require('discord.js');
-
+const Discord = require('discord.js')
 const commands = require('./commands')
-
 const Bot = require('ahkframework')
-const prefix = '?'
 
-const galharim = {
-    id: process.env.GALHARIM_ID,
-    channel: process.env.GALHARIM_CHAN_ID
-}
+const prefix = '/'
 
 const config = {
     token: process.env.DISCORD_TOKEN,
@@ -24,24 +18,24 @@ const config = {
 const user = new Bot(config)
 
 user.registerEvent('guildMemberAdd', (member) => {
-    if(member.guild.id === ""){
+    if(member.guild.id === process.env.GALHARIM_ID){
         const embed = new Discord.RichEmbed()
             .setAuthor(member.user.username, member.user.avatarURL)
             .setColor('#EFEA6B')
             .addField('Bienvenue à ' + member.user.username, 'Souhaitez la bienvenue au nouveau vous autres, ou soyez maudit !')
 
-        member.guild.channels.filter(channel => channel.id === "")
+        member.guild.channels.filter(channel => channel.id === process.env.GALHARIM_CHAN_ID)
             .forEach(chann => chann.send({ embed }))
 
     }
 })
 
 user.registerCommand(commands.github, (message, channel, client, args) => {
-    const embed = new Discord.RichEmbed();
-        .setColor("#016AC7");
-        .setThumbnail("http://litarvan.github.io/krobot_icons/info_v2.png");
-        .addField("**" + "ping" + "**", client.ping.toFixed(0) + "ms.");
-    channel.send({ embed });
+    const embed = new Discord.RichEmbed()
+        .setColor("#016AC7")
+        .setThumbnail("http://litarvan.github.io/krobot_icons/info_v2.png")
+        .addField("**" + "ping" + "**", client.ping.toFixed(0) + "ms.")
+    channel.send({ embed })
 })
 
 user.registerCommand(commands.github, (message, channel, client, args) => {
